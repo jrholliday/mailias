@@ -1,6 +1,9 @@
 <?php
 $maildir = '/var/www/Maildir/new/';
-$hide_mailbox_list = false;
+
+$hide_mailbox_list = true;
+
+/*--------------------------------------------------------------------------*/
 
 require_once('MimeMailParser.class.php');
 
@@ -113,23 +116,19 @@ function get_email($filename)
 	print($xml->asXML());
 }
 
+$user = isset($_GET['user']) ? $_GET['user'] : '';
+$mail = isset($_GET['id']) ? $_GET['id'] : '';
 
-$tokens = explode('/', $_SERVER['REQUEST_URI']);
-
-if ( (count($tokens) >= 3) && ($tokens[1] != '') )
+if  ( $user != '' )
 {
-	if ( $tokens[2] != '' )
+	if ( $mail != '' )
 	{
-		get_email($tokens[2]);
+		get_email($mail);
 	}
 	else
 	{
-		get_mailbox($tokens[1]);
+		get_mailbox($user);
 	}
-}
-elseif ( (count($tokens) >= 2) && ($tokens[1] != '') )
-{
-	get_mailbox($tokens[1]);
 }
 else
 {
