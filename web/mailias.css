@@ -1,0 +1,178 @@
+html, body, div, span, h1, pre, a, img, table, tbody, tfoot
+thead, tr, th, td, header, footer, article, input, button, form {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+html {
+	position: relative;
+	min-height: 100%;
+}
+
+body {
+	background-color: #FFF;
+	color: #557576;
+	font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-size: 18px;
+	line-height: 28px;
+	margin-bottom: 100px;
+	overflow-y: scroll;
+}
+
+header {
+	width: 100%;
+	height: 95px;
+	background-color: rgb(46, 204, 113);
+	border-bottom: 20px solid rgb(32, 142, 78);
+	font-size: 42px;
+	font-weight: bold;
+	line-height:75px;
+	letter-spacing: 10px;
+	color: rgb(32, 142, 78);
+	box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	padding: 0 20px;
+}
+
+header > img {
+	height: 150px;
+	margin-top: 3px;
+	float: right;
+}
+
+footer {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 50px;
+	background-color: rgb(46, 204, 113);
+	border-top: 20px solid rgb(32, 142, 78);
+	font-size: 12px;
+	font-style: italic;
+	text-align: center;
+	line-height: 50px;
+	color: rgb(32, 142, 78);
+}
+
+article {
+	width: 950px;
+	margin: 50px auto;	
+}
+
+h1 {
+	font-size: xx-large;
+	font-weight: bold;
+}
+
+h1 > span {
+	color: rgb(52, 152, 219);
+}
+
+form > div {
+	position: absolute;
+	margin: auto;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 50px;
+	width: 100%;
+	text-align: center;
+}
+
+input {
+	// width: 500px;
+	height: 40px;
+	border: 2px solid #CCC;
+	box-sizing:border-box;
+	-moz-box-sizing:border-box;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	border-spacing: 0;
+	font-size: 14px;
+	margin-top: 50px;
+}
+
+tr {
+	height: 40px;
+	line-height: 40px;
+}
+
+tr:nth-child(odd) {
+	background-color: #EEE;
+}
+
+tr:first-child {
+	cursor: default;
+	background-color: #FFF;
+	border-bottom: 3px solid #EEE;
+}
+
+tr:not(:first-child):hover {
+	background-color: #B7DBE9;
+	cursor: pointer;
+}
+
+th {
+	text-align: left;
+	font-size: large;
+	font-weight: bold;	
+}
+
+td {
+	padding: none;
+	text-align: left;
+	vertical-align: middle;
+}
+
+tr > td:last-child,
+tr > th:last-child
+{
+	text-align: right;
+} 
+
+a {
+	text-decoration: none;
+	color: rgb(39, 174, 96);
+}
+
+div > span {
+	display: inline-block;
+	color: rgb(52, 152, 219);
+	width: 6em;
+	font-weight: bold;
+}
+
+button {
+	width: 140px;
+	height: 40px;
+	margin: 20px 10px 30px 0;
+	border: 2px solid #CCC;
+	cursor: pointer;
+}
+
+button:hover {
+	background: #DDD;
+}
+
+article > div > div {
+	border:2px solid #EEE;
+	padding: 25px;
+}
+
+article > div > pre {
+	white-space: pre-wrap;
+	border:2px solid #EEE;
+	padding: 25px;
+	font-size: small;
+	background: #FFE;
+	display: none;
+}
