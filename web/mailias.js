@@ -32,7 +32,15 @@ jQuery(document).ready(function($) {
             }
 	});
 
-	$("button").eq(1).prop('disabled', true);
+	$("button").eq(1).click(function() {
+	    var address = prompt("Enter email address:");
+
+	    if ( address !== null ) {
+		$.get(window.location.href + "/" + address, function() {
+		    alert('Email forwarded to ' + address);
+		});
+	    }
+	});
 
 	$("button").eq(2).click(function() {
 	    if ( confirm("Delete this message?") == true ) {

@@ -9,14 +9,22 @@ RewriteRule ^(.*)/$ $1 [R=302,L]
 RewriteCond %{QUERY_STRING} ^q=(.+)$
 RewriteRule ^ %1? [R=302,L] 
 
+# Delete Message
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.+)/(.+)/x$ index.php?user=$1&id=$2&del=1 [L]
 
+# Forward Message
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.+)/(.+)/(.*@.*)$ index.php?user=$1&id=$2&push=$3 [L]
+
+# Get Message
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.+)/(.*)$ index.php?user=$1&id=$2 [L]
 
+# Get Mailbox
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.+)$ index.php?user=$1 [L]

@@ -1,6 +1,9 @@
 <?php
+
+// Set Maildir
 $maildir = '/var/www/Maildir/new/';
 
+// Hide mailbox list?
 $hide_mailbox_list = false;
 
 /*--------------------------------------------------------------------------*/
@@ -16,7 +19,7 @@ function get_all_mailboxes()
 	{
 		$email = htmlentities(file_get_contents($maildir . $filename));
 
-		if ( preg_match('/Original-To: (.*)@mail.jamesandt.com/', $email, $addresses) )
+		if ( preg_match('/Original-To: (.*)@(.*)/', $email, $addresses) )
 		{
 			if ( in_array($addresses[1], $users) == false )
 			{
@@ -141,11 +144,58 @@ function delete_email($filename)
 	}
 }
 
+function forward_email($filename, $to_address)
+{
+	global $maildir;
+
+	$handle = realpath($maildir . $filename);
+
+	if ( $handle !== ($maildir . $filename) )
+	{
+		// Can't have relative paths in the file name!
+		return;
+	}
+	else
+	{
+	if ( file_exists($handle) === false )
+		{
+			// File not found!
+			return;
+		}
+		else
+		{
+			$email = file_get_contents($handle);
+
+			preg_match('/From:.*<(.*)>/', $email, $from);
+
+			$lSmtpTalk = array(
+				array('220', 'HELO '.$_SERVER['SERVER_NAME'].chr(10)),
+				array('250', 'MAIL FROM: <' . $from[1] . '>'.chr(10)),
+				array('250', 'RCPT TO: <' . $to_address . '>'.chr(10)),
+				array('250', 'DATA'.chr(10)),
+				array('354', $email.chr(10).'.'.chr(10)),
+				array('250', 'QUIT'.chr(10)),
+				array('221', ''));
+			$lConnection = fsockopen('localhost', 25, $errno, $errstr, 1);
+			if (!$lConnection) die('Cant relay, no connnection');
+			for ($i=0;$i<count($lSmtpTalk);$i++) {
+				$lRes = fgets($lConnection, 256);
+				if (substr($lRes, 0, 3) !== $lSmtpTalk[$i][0])
+					die('Got '.$lRes.' - expected: '.$lSmtpTalk[$i][0]);
+				if ($lSmtpTalk[$i][1] !== '')
+					fputs($lConnection, $lSmtpTalk[$i][1]);
+			}
+			fclose($lConnection);
+		}
+	}
+}
+
 /*--------------------------------------------------------------------------*/
 
 $user = isset($_GET['user']) ? $_GET['user'] : '';
 $mail = isset($_GET['id'])   ? $_GET['id']   : '';
 $del  = isset($_GET['del'])  ? $_GET['del']  : '';
+$push = isset($_GET['push']) ? $_GET['push'] : '';
 
 if  ( $user != '' )
 {
@@ -154,6 +204,10 @@ if  ( $user != '' )
 		if ( $del == '1' )
 		{
 			delete_email($mail);
+		}
+		else if ( $push != '' )
+		{
+			forward_email($mail, $push);
 		}
 		else
 		{
