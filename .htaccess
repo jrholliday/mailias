@@ -1,5 +1,9 @@
 RewriteEngine On
 
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} ^(.*)/$
+RewriteRule ^(.+)/$  /$1 [R=301,L]
+
 RewriteCond %{QUERY_STRING} ^q=(.+)$
 RewriteRule ^ /%1? [R=301,L] 
 
