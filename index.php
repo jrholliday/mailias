@@ -1,7 +1,7 @@
 <?php
 $maildir = '/var/www/Maildir/new/';
 
-$hide_mailbox_list = true;
+$hide_mailbox_list = false;
 
 /*--------------------------------------------------------------------------*/
 
@@ -32,7 +32,7 @@ function get_all_mailboxes()
 
 	$xml = new SimpleXMLElement(
 			'<?xml version="1.0" encoding="UTF-8"?>' .
-			'<?xml-stylesheet type="text/xsl" href="/web/mailias.xsl"?>' .
+			'<?xml-stylesheet type="text/xsl" href="web/mailias.xsl"?>' .
 			'<Postoffice/>');
 
 	foreach ( $users as $user => $count )
@@ -52,7 +52,7 @@ function get_mailbox($user)
 
 	$xml = new SimpleXMLElement(
 			'<?xml version="1.0" encoding="UTF-8"?>' .
-			'<?xml-stylesheet type="text/xsl" href="/web/mailias.xsl"?>' .
+			'<?xml-stylesheet type="text/xsl" href="web/mailias.xsl"?>' .
 			'<Mailbox/>');
 	$xml->addChild('User', $user);
 
@@ -102,7 +102,7 @@ function get_email($filename)
 
 	$xml = new SimpleXMLExtended(
 			'<?xml version="1.0"?>' .
-			'<?xml-stylesheet type="text/xsl" href="/web/mailias.xsl"?>' .
+			'<?xml-stylesheet type="text/xsl" href="../web/mailias.xsl"?>' .
 			'<Message/>');
 
 	$xml->addChild('To', $to);
@@ -171,7 +171,7 @@ else
 	{
 		$xml = new SimpleXMLElement(
 				'<?xml version="1.0" encoding="UTF-8"?>' .
-				'<?xml-stylesheet type="text/xsl" href="/web/mailias.xsl"?>' .
+				'<?xml-stylesheet type="text/xsl" href="web/mailias.xsl"?>' .
 				'<Mailias/>');
 
 		Header('Content-type: text/xml; charset=UTF-8');

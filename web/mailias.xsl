@@ -7,10 +7,10 @@
       <head>
 	<meta charset='utf-8'/>
 	<title>mAiLIAS</title>
-	<link href="/web/mailias.css" rel="stylesheet"/> 
+	<link href="web/mailias.css" rel="stylesheet"/> 
      </head>
       <body>
-	<header>mAiLIAS<img src="/web/mailias.png" alt="logo"/></header>
+	<header>mAiLIAS<img src="web/mailias.png" alt="logo"/></header>
         <article>
           <form>
             <div>
@@ -21,7 +21,7 @@
         </article>
 	<footer>mAiLIAS - Personal ad hoc email addresses.</footer>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-	<script src="/web/mailias.js"></script>
+	<script src="web/mailias.js"></script>
       </body>
     </html>
   </xsl:template>
@@ -32,10 +32,10 @@
       <head>
 	<meta charset='utf-8'/>
 	<title>mAiLIAS</title>
-	<link href="/web/mailias.css" rel="stylesheet"/> 
+	<link href="web/mailias.css" rel="stylesheet"/> 
      </head>
       <body>
-	<header>mAiLIAS<img src="/web/mailias.png" alt="logo"/></header>
+	<header>mAiLIAS<img src="web/mailias.png" alt="logo"/></header>
         <article>
 	  <h1>Current Mailboxes</h1>
 	  <table>
@@ -53,7 +53,7 @@
         </article>
 	<footer>mAiLIAS - Personal ad hoc email addresses.</footer>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-	<script src="/web/mailias.js"></script>
+	<script src="web/mailias.js"></script>
       </body>
     </html>
   </xsl:template>
@@ -63,10 +63,10 @@
       <head>
 	<meta charset='utf-8'/>
 	<title>[<xsl:value-of select="count(Email)"/>] <xsl:value-of select="User"/></title>
-	<link href="/web/mailias.css" rel="stylesheet"/> 
+	<link href="web/mailias.css" rel="stylesheet"/> 
       </head>
       <body>
-	<header>mAiLIAS<img src="/web/mailias.png" alt="logo"/></header>
+	<header>mAiLIAS<img src="web/mailias.png" alt="logo"/></header>
         <article>
 	  <h1>Mailbox for: <span><xsl:value-of select="User"/></span></h1>
 	  <table>
@@ -86,7 +86,7 @@
         </article>
         <footer>mAiLIAS - Personal ad hoc email addresses.</footer>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-	<script src="/web/mailias.js"></script>
+	<script src="web/mailias.js"></script>
       </body>
     </html>
   </xsl:template>
@@ -95,10 +95,10 @@
     <html>
       <head>
 	<title><xsl:value-of select="Subject"/></title>
-	<link href="/web/mailias.css" rel="stylesheet"/> 
+	<link href="../web/mailias.css" rel="stylesheet"/> 
       </head>
       <body>
-	<header>mAiLIAS<img src="/web/mailias.png" alt="logo"/></header>
+	<header>mAiLIAS<img src="../web/mailias.png" alt="logo"/></header>
         <article>
           <div>
             <span>To:</span> <xsl:value-of select="To"/><br/>
@@ -114,7 +114,7 @@
         </article>
         <footer>mAiLIAS - Personal ad hoc email addresses.</footer>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-	<script src="/web/mailias.js"></script>
+	<script src="../web/mailias.js"></script>
       </body>
     </html>
   </xsl:template>

@@ -1,6 +1,7 @@
 jQuery(document).ready(function($) {
     // Hyperling header to root
-    $("header").contents().first().wrap("<a href='/'></a>" );
+    var root = ( $("script").last().attr("src").split("/")[0] == "web" ? "./" : "../" );
+    $("header").contents().first().wrap("<a href='" + root + "'></a>" );
 
     // Handle table row clicks
     $("tr").click(function() {
