@@ -116,14 +116,49 @@ function get_email($filename)
 	print($xml->asXML());
 }
 
+function delete_email($filename)
+{
+	global $maildir;
+
+	$handle = realpath($maildir . $filename);
+
+	if ( $handle !== ($maildir . $filename) )
+	{
+		// Can't have relative paths in the file name!
+		return;
+	}
+	else
+	{
+	if ( file_exists($handle) === false )
+		{
+			// File not found!
+			return;
+		}
+		else
+		{
+			unlink($handle);
+		}
+	}
+}
+
+/*--------------------------------------------------------------------------*/
+
 $user = isset($_GET['user']) ? $_GET['user'] : '';
-$mail = isset($_GET['id']) ? $_GET['id'] : '';
+$mail = isset($_GET['id'])   ? $_GET['id']   : '';
+$del  = isset($_GET['del'])  ? $_GET['del']  : '';
 
 if  ( $user != '' )
 {
 	if ( $mail != '' )
 	{
-		get_email($mail);
+		if ( $del == '1' )
+		{
+			delete_email($mail);
+		}
+		else
+		{
+			get_email($mail);
+		}
 	}
 	else
 	{

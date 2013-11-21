@@ -1,4 +1,7 @@
 jQuery(document).ready(function($) {
+    // Hyperling header to root
+    $("header").contents().first().wrap("<a href='/'></a>" );
+
     // Handle table row clicks
     $("tr").click(function() {
 	var link = $(this).find('a').attr("href");
@@ -29,6 +32,13 @@ jQuery(document).ready(function($) {
 	});
 
 	$("button").eq(1).prop('disabled', true);
-	$("button").eq(2).prop('disabled', true);
+
+	$("button").eq(2).click(function() {
+	    if ( confirm("Delete this message?") == true ) {
+		$.get(window.location.href + "/x", function() {
+		    window.location = "./";
+		});
+	    }
+	});
     }
 });
