@@ -1,11 +1,13 @@
 RewriteEngine On
 
+# If you install in a subdirectory, indicate that subdirectory here
+RewriteBase /
+
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_URI} ^(.*)/$
-RewriteRule ^(.+)/$  /$1 [R=301,L]
+RewriteRule ^(.*)/$ $1 [R=302,L]
 
 RewriteCond %{QUERY_STRING} ^q=(.+)$
-RewriteRule ^ /%1? [R=301,L] 
+RewriteRule ^ %1? [R=302,L] 
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
