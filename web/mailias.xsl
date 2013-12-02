@@ -42,11 +42,13 @@
 	    <tr>
 	      <th>Mailbox</th>
 	      <th>Count</th>
+	      <th>Last Mail Received</th>
 	    </tr>
 	    <xsl:for-each select="Mailbox">
 	      <tr>
 	        <td><a><xsl:attribute name="href"><xsl:value-of select="User"/></xsl:attribute><xsl:value-of select="User"/></a></td>
 	        <td><a><xsl:attribute name="href"><xsl:value-of select="User"/></xsl:attribute><xsl:value-of select="Count"/></a></td>
+	        <td><a><xsl:attribute name="href"><xsl:value-of select="User"/></xsl:attribute><xsl:value-of select="Latest"/></a></td>
 	      </tr>
 	    </xsl:for-each>
 	  </table>

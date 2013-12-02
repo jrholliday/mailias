@@ -15,19 +15,28 @@ function get_all_mailboxes()
 	global $maildir;
 
 	$users = array();
+	$dates = array();
 	foreach ( scandir($maildir) as $filename )
 	{
 		$email = htmlentities(file_get_contents($maildir . $filename));
 
 		if ( preg_match('/Original-To: (.*)@(.*)/', $email, $addresses) )
 		{
+			preg_match('/Date: (.*)/', $email, $date);
+			$date_stamp = strtotime($date[1]);
+
 			if ( in_array($addresses[1], $users) == false )
 			{
-				$users[$addresses[1]]  = 1;
+				$users[$addresses[1]] = 1;
+				$dates[$addresses[1]] = $date_stamp;
 			}
 			else
 			{
 				$users[$addresses[1]] += 1;
+				if ( $date_stamp > $dates[$addresses[1]] )
+				{
+					$dates[$addresses[1]] = $date_stamp;
+				}
 			}
 		}
 	}
@@ -40,9 +49,21 @@ function get_all_mailboxes()
 
 	foreach ( $users as $user => $count )
 	{
+		$ms = intval((time() - $dates[$user])/60);
+		$hs = intval((time() - $dates[$user])/3600);
+		$ds = intval((time() - $dates[$user])/86400);
+
+		if      ( $ds  > 1 )  $latest = sprintf("about %d days ago", $ds);
+		else if ( $ds == 1 )  $latest = sprintf("yesterday");
+		else if ( $hs  > 1 )  $latest = sprintf("about %d hours ago", $hs);
+		else if ( $hs == 1 )  $latest = sprintf("about an hours ago");
+		else if ( $ms  > 1 )  $latest = sprintf("about %d minutes ago", $ms);
+		else                  $latest = sprintf("just now");
+
 		$node = $xml->addChild('Mailbox');
 		$node->addChild('User', $user);
 		$node->addChild('Count', $count);
+		$node->addChild('Latest', $latest);
 	}
 	Header('Content-type: text/xml; charset=UTF-8');
 	print($xml->asXML());
