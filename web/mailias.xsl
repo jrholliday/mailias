@@ -70,7 +70,7 @@
       <body>
 	<header>mAiLIAS<img src="web/mailias.png" alt="logo"/></header>
         <article>
-	  <h1>Mailbox for: <span><xsl:value-of select="User"/></span></h1>
+          <h1>Mailbox for: <span><xsl:value-of select="User"/></span><a><xsl:attribute name="href"><xsl:value-of select="User"/>/rss</xsl:attribute><img src="web/rss.png" alt="RSS feed"/></a></h1>
 	  <table>
 	    <tr>
 	      <th>From</th>

@@ -71,6 +71,7 @@ h1 {
 
 h1 > span {
 	color: rgb(52, 152, 219);
+	margin-right: 8px;
 }
 
 form > div {

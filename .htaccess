@@ -19,6 +19,11 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.+)/(.+)/(.*@.*)$ index.php?user=$1&id=$2&push=$3 [L]
 
+# Get RSS Feed
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.+)/rss$ index.php?user=$1&rss=1 [L]
+
 # Get Message
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d

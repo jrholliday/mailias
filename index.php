@@ -101,6 +101,43 @@ function get_mailbox($user)
 	print($xml->asXML());
 }
 
+function get_mailbox_rss($user)
+{
+	global $maildir;
+
+	$url = 'http://' . $_SERVER['HTTP_HOST'] . '/';
+
+	$xml = new SimpleXMLElement(
+			'<?xml version="1.0" encoding="UTF-8"?>' .
+			'<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"/>');
+	$channel = $xml->addChild('channel');
+
+	$channel->addChild('title', 'Mailbox: '.$user);
+	$channel->addChild('link', $url);
+	$channel->addChild('description', 'mAiLIAS: Personal ad hoc email addresses.');
+
+	foreach ( scandir($maildir) as $filename )
+	{
+		$email = htmlentities(file_get_contents($maildir . $filename));
+
+		if ( preg_match("/Original-To: $user@mail.jamesandt.com/", $email) )
+		{
+			preg_match('/Date: (.*)/', $email, $date);
+			preg_match('/From: (.*)/', $email, $from);
+			preg_match('/Subject: (.*)/', $email, $subject);
+
+			$node = $channel->addChild('item');
+			$node->addChild('title', $subject[1]);
+			$node->addChild('link', $url.$user.'/'.$filename);
+			$node->addChild('description');
+			$node->addChild('dc:creator', $from[1]);
+			$node->addChild('dc:date', $date[1]);
+		}
+	}
+	Header('Content-type: text/xml; charset=UTF-8');
+	print($xml->asXML());
+}
+
 function get_email($filename)
 {
 	global $maildir;
@@ -217,6 +254,7 @@ $user = isset($_GET['user']) ? $_GET['user'] : '';
 $mail = isset($_GET['id'])   ? $_GET['id']   : '';
 $del  = isset($_GET['del'])  ? $_GET['del']  : '';
 $push = isset($_GET['push']) ? $_GET['push'] : '';
+$rss  = isset($_GET['rss'])  ? $_GET['rss']  : '';
 
 if  ( $user != '' )
 {
@@ -237,7 +275,14 @@ if  ( $user != '' )
 	}
 	else
 	{
-		get_mailbox($user);
+		if ( $rss == '1' )
+		{
+			get_mailbox_rss($user);
+		}
+		else
+		{
+			get_mailbox($user);
+		}
 	}
 }
 else
