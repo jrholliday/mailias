@@ -25,18 +25,18 @@ function get_all_mailboxes()
 			preg_match('/Date: (.*)/', $email, $date);
 			$date_stamp = strtotime($date[1]);
 
-			if ( in_array($addresses[1], $users) == false )
-			{
-				$users[$addresses[1]] = 1;
-				$dates[$addresses[1]] = $date_stamp;
-			}
-			else
+			if ( array_key_exists($addresses[1], $users) )
 			{
 				$users[$addresses[1]] += 1;
 				if ( $date_stamp > $dates[$addresses[1]] )
 				{
 					$dates[$addresses[1]] = $date_stamp;
 				}
+			}
+			else
+			{
+				$users[$addresses[1]] = 1;
+				$dates[$addresses[1]] = $date_stamp;
 			}
 		}
 	}
@@ -56,7 +56,7 @@ function get_all_mailboxes()
 		if      ( $ds  > 1 )  $latest = sprintf("about %d days ago", $ds);
 		else if ( $ds == 1 )  $latest = sprintf("yesterday");
 		else if ( $hs  > 1 )  $latest = sprintf("about %d hours ago", $hs);
-		else if ( $hs == 1 )  $latest = sprintf("about an hours ago");
+		else if ( $hs == 1 )  $latest = sprintf("about an hour ago");
 		else if ( $ms  > 1 )  $latest = sprintf("about %d minutes ago", $ms);
 		else                  $latest = sprintf("just now");
 
@@ -70,6 +70,22 @@ function get_all_mailboxes()
 }
 
 
+function scan_mail_dir($dir)
+{
+	$files = array();
+
+	foreach (scandir($dir) as $file)
+	{
+		$files[$file] = filemtime($dir . '/' . $file);
+	}
+
+	arsort($files);
+	$files = array_keys($files);
+
+	return ($files) ? $files : false;
+}
+
+
 function get_mailbox($user)
 {
 	global $maildir;
@@ -80,7 +96,7 @@ function get_mailbox($user)
 			'<Mailbox/>');
 	$xml->addChild('User', $user);
 
-	foreach ( scandir($maildir) as $filename )
+	foreach ( scan_mail_dir($maildir) as $filename )
 	{
 		$email = htmlentities(file_get_contents($maildir . $filename));
 
