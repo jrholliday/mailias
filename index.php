@@ -106,14 +106,21 @@ function get_mailbox_rss($user)
 	global $maildir;
 
 	$url = 'http://' . $_SERVER['HTTP_HOST'] . '/';
+	$uri = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+
+	$dc = 'http://purl.org/dc/elements/1.1/';
+	$atom = 'http://www.w3.org/2005/Atom';
 
 	$xml = new SimpleXMLElement(
 			'<?xml version="1.0" encoding="UTF-8"?>' .
-			'<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"/>');
+			'<rss version="2.0" xmlns:dc="'.$dc.'" xmlns:atom="'.$atom.'"/>');
 	$channel = $xml->addChild('channel');
 
 	$channel->addChild('title', 'Mailbox: '.$user);
 	$channel->addChild('link', $url);
+	$link = $channel->addChild('atom:link', '', $atom);
+	$link->addAttribute('href', $uri);
+	$link->addAttribute('rel', 'self');
 	$channel->addChild('description', 'mAiLIAS: Personal ad hoc email addresses.');
 
 	foreach ( scandir($maildir) as $filename )
@@ -126,12 +133,16 @@ function get_mailbox_rss($user)
 			preg_match('/From: (.*)/', $email, $from);
 			preg_match('/Subject: (.*)/', $email, $subject);
 
+			$date_stamp = strtotime($date[1]);
+			$date = date("c", $date_stamp);
+
 			$node = $channel->addChild('item');
 			$node->addChild('title', $subject[1]);
 			$node->addChild('link', $url.$user.'/'.$filename);
+			$node->addChild('guid', $url.$user.'/'.$filename);
 			$node->addChild('description');
-			$node->addChild('dc:creator', $from[1]);
-			$node->addChild('dc:date', $date[1]);
+			$node->addChild('dc:creator', $from[1], $dc);
+			$node->addChild('dc:date', $date, $dc);
 		}
 	}
 	Header('Content-type: text/xml; charset=UTF-8');
