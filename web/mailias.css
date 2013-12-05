@@ -1,5 +1,6 @@
-html, body, div, span, h1, pre, a, img, table, tbody, tfoot
-thead, tr, th, td, header, footer, article, input, button, form {
+html, body, div, span, h1, pre, a, img, table, tbody, tfoot,
+thead, tr, th, td, header, footer, article, input, button, form
+{
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -87,7 +88,6 @@ form > div {
 }
 
 input {
-	// width: 500px;
 	height: 40px;
 	border: 2px solid #CCC;
 	box-sizing:border-box;
@@ -129,7 +129,7 @@ th {
 }
 
 td {
-	padding: none;
+	padding: 0;
 	text-align: left;
 	vertical-align: middle;
 }
