@@ -65,17 +65,17 @@ article {
 	margin: 50px auto;	
 }
 
-h1 {
+article > h1 {
 	font-size: xx-large;
 	font-weight: bold;
 }
 
-h1 > span {
+article > h1 > span {
 	color: rgb(52, 152, 219);
 	margin-right: 8px;
 }
 
-form > div {
+article > form > div {
 	position: absolute;
 	margin: auto;
 	top: 0;
@@ -94,7 +94,7 @@ input {
 	-moz-box-sizing:border-box;
 }
 
-table {
+article > table {
 	width: 100%;
 	border-collapse: collapse;
 	border-spacing: 0;
@@ -102,40 +102,40 @@ table {
 	margin-top: 50px;
 }
 
-tr {
+article > table tr {
 	height: 40px;
 	line-height: 40px;
 }
 
-tr:nth-child(odd) {
+article > table tr:nth-child(odd) {
 	background-color: #EEE;
 }
 
-tr:first-child {
+article > table tr:first-child {
 	cursor: default;
 	background-color: #FFF;
 	border-bottom: 3px solid #EEE;
 }
 
-tr:not(:first-child):hover {
+article > table tr:not(:first-child):hover {
 	background-color: #B7DBE9;
 	cursor: pointer;
 }
 
-th {
+article > table th {
 	text-align: left;
 	font-size: large;
 	font-weight: bold;	
 }
 
-td {
+article > table td {
 	padding: 0;
 	text-align: left;
 	vertical-align: middle;
 }
 
-tr > td:last-child,
-tr > th:last-child
+article > table tr > td:last-child,
+article > table tr > th:last-child
 {
 	text-align: right;
 } 
@@ -145,7 +145,7 @@ a {
 	color: rgb(39, 174, 96);
 }
 
-div > span {
+article > div > span {
 	display: inline-block;
 	color: rgb(52, 152, 219);
 	width: 6em;
