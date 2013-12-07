@@ -8,6 +8,7 @@
 	<meta charset='utf-8'/>
 	<title>mAiLIAS</title>
 	<link href="web/mailias.css" rel="stylesheet"/> 
+	<xsl:text disable-output-escaping="yes">&lt;!--[if lt IE 9]&gt;&lt;script src="web/html5shiv.js"&gt;&lt;/script&gt;&lt;![endif]--&gt;</xsl:text>
      </head>
       <body>
 	<header>mAiLIAS<img src="web/mailias.png" alt="logo"/></header>
@@ -33,6 +34,7 @@
 	<meta charset='utf-8'/>
 	<title>mAiLIAS</title>
 	<link href="web/mailias.css" rel="stylesheet"/> 
+	<xsl:text disable-output-escaping="yes">&lt;!--[if lt IE 9]&gt;&lt;script src="web/html5shiv.js"&gt;&lt;/script&gt;&lt;![endif]--&gt;</xsl:text>
      </head>
       <body>
 	<header>mAiLIAS<img src="web/mailias.png" alt="logo"/></header>
@@ -66,6 +68,7 @@
 	<meta charset='utf-8'/>
 	<title>[<xsl:value-of select="count(Email)"/>] <xsl:value-of select="User"/></title>
 	<link href="web/mailias.css" rel="stylesheet"/> 
+	<xsl:text disable-output-escaping="yes">&lt;!--[if lt IE 9]&gt;&lt;script src="web/html5shiv.js"&gt;&lt;/script&gt;&lt;![endif]--&gt;</xsl:text>
       </head>
       <body>
 	<header>mAiLIAS<img src="web/mailias.png" alt="logo"/></header>
@@ -98,6 +101,7 @@
       <head>
 	<title><xsl:value-of select="Subject"/></title>
 	<link href="../web/mailias.css" rel="stylesheet"/> 
+	<xsl:text disable-output-escaping="yes">&lt;!--[if lt IE 9]&gt;&lt;script src="../web/html5shiv.js"&gt;&lt;/script&gt;&lt;![endif]--&gt;</xsl:text>
       </head>
       <body>
 	<header>mAiLIAS<img src="../web/mailias.png" alt="logo"/></header>
